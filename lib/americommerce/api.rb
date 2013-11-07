@@ -21,7 +21,7 @@ module AmericommerceApi
 
       @store_domain = options[:store_domain] + WSDL_POSTFIX
 
-      @client = AmericommerceApi::Api.init_client(@ac_header, @store_domain)
+      init_client(@ac_header, @store_domain)
     end
 
     def get_orders(options = {})
@@ -45,13 +45,13 @@ module AmericommerceApi
     def ping
       begin
         wsdl = AUTHENTICATE_WSDL % {store_domain: @store_domain}
-        @client = AmericommerceApi::Api.init_client(@ac_header,wsdl)
+        init_client(@ac_header,wsdl)
         response = request(:authenticate)
         raise AmericommerceApi::Exceptions::InvalidCredentials unless response == true
       rescue
         raise AmericommerceApi::Exceptions::InvalidCredentials
       ensure
-        @client = AmericommerceApi::Api.init_client(@ac_header, @store_domain)
+        init_client(@ac_header, @store_domain)
       end
     end
 
@@ -62,12 +62,13 @@ module AmericommerceApi
       return AmericommerceApi::Response.format(response, call_action)
     end
 
-    def self.init_client(ac_header, wsdl)
-      return Savon.client({
+    def init_client(ac_header, wsdl)
+      @client = Savon.client({
                                  :ssl_verify_mode  => :none,
                                  :wsdl             => wsdl,
                                  :soap_header      => ac_header,
-                                 :namespaces       => NAMESPACES
+                                 :namespaces       => NAMESPACES,
+                                 :log_level        => :warn
                              })
     end
 
