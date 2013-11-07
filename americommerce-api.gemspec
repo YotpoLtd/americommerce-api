@@ -11,6 +11,6 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
   s.require_paths = ['lib']
   s.authors  = ["Yotpo/avichay@yotpo"]
-  s.files = ["README.md", "americommerce-api.gemspec"] + Dir['**/*.rb'] + Dir['**/*.crt']
+  s.files = ["README.md", "americommerce-api.gemspec"] + Dir['**/*.rb'] + Dir['**/*.crt'] + Dir['**/*.wsdl']
   s.add_dependency 'savon'
 end
