@@ -59,8 +59,13 @@ module AmericommerceApi
     private
 
     def request(call_action, request_params={})
-      response = @client.call(call_action, message: request_params)
-      return AmericommerceApi::Response.format(response, call_action)
+      begin
+        response = @client.call(call_action, message: request_params)
+        return AmericommerceApi::Response.format(response, call_action)
+      rescue Exception => e
+        #check invalid by message of error because code returned by americommerce is 500 and not 4**
+        raise e.message.include?('Unauthorized Request') ? AmericommerceApi::Exceptions::InvalidCredentials : e
+      end
     end
 
     def init_client(ac_header, wsdl)
