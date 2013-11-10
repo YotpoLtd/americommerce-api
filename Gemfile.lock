@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    americommerce-api (0.0.2)
+    americommerce-api (0.0.3)
       savon
 
 GEM
