@@ -12,6 +12,7 @@ module AmericommerceApi
     def initialize(options)
 
       @log_level = options[:log_level] || :warn
+      @logger = options[:logger] || $stdout
       @ac_header = {
           'AmeriCommerceHeaderInfo' => {
               'UserName' => options[:username],
@@ -74,7 +75,8 @@ module AmericommerceApi
                                  :wsdl             => wsdl,
                                  :soap_header      => ac_header,
                                  :namespaces       => NAMESPACES,
-                                 :log_level        => @log_level
+                                 :log_level        => @log_level,
+                                 :logger           => @logger
                              })
     end
 
