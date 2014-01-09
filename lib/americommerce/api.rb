@@ -13,6 +13,7 @@ module AmericommerceApi
 
       @log_level = options[:log_level] || :warn
       @logger = options[:logger] || $stdout
+      @timeout = options[:timeout] || 60
       @ac_header = {
           'AmeriCommerceHeaderInfo' => {
               'UserName' => options[:username],
@@ -76,7 +77,9 @@ module AmericommerceApi
                                  :soap_header      => ac_header,
                                  :namespaces       => NAMESPACES,
                                  :log_level        => @log_level,
-                                 :logger           => @logger
+                                 :logger           => @logger,
+                                 :read_timeout     => @timeout,
+                                 :open_timeout     => @timeout
                              })
     end
 
