@@ -73,6 +73,7 @@ module AmericommerceApi
     def init_client(ac_header, wsdl)
       @client = Savon.client({
                                  :ssl_verify_mode  => :none,
+                                 :ssl_version      => :TLSv1,
                                  :wsdl             => wsdl,
                                  :soap_header      => ac_header,
                                  :namespaces       => NAMESPACES,
