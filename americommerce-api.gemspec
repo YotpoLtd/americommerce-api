@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
   s.files               = ["README.md", "americommerce-api.gemspec"] + Dir['**/*.rb'] + Dir['**/*.crt'] + Dir['**/*.wsdl']
 
   s.license             = "MIT"
-  s.add_dependency 'savon', '~> 2.3.3'
+  s.add_dependency 'savon'
 end
